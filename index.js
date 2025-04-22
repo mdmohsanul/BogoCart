@@ -1,24 +1,24 @@
 const productOptions = [
   {
     id: 1,
-    units: "2 Unit",
+    units: "1 Unit",
     discount: "10% Off",
     price: "$10.00 USD",
-    oldPrice: "$24.00 USD",
+    originaPrice: "$24.00 USD",
   },
   {
     id: 2,
     units: "2 Unit",
     discount: "20% Off",
     price: "$18.00 USD",
-    oldPrice: "$24.00 USD",
+    originaPrice: "$24.00 USD",
   },
   {
     id: 3,
     units: "3 Unit",
     discount: "30% Off",
     price: "$20.00 USD",
-    oldPrice: "$24.00 USD",
+    originaPrice: "$24.00 USD",
   },
 ];
 const sizeOptions = ["S", "M", "L", "XL"];
@@ -26,7 +26,7 @@ const colorOptions = ["Black", "Green", "Yellow", "White"];
 const options = document.getElementById("options");
 const allRadios = document.querySelectorAll('input[type="radio"]');
 
-const selectOptions = (idPrefix, index, name, optionsArray, label) => {
+const selectOptions = (id, name, index, optionsArray, label) => {
   const options = optionsArray
     .map(
       (val) =>
@@ -38,33 +38,35 @@ const selectOptions = (idPrefix, index, name, optionsArray, label) => {
 
   return `
         <div class="variant-select">
-          <label for="${name}-${idPrefix}-${index}">${label}</label>
-          <select id="${name}-${idPrefix}-${index}" name="${name}">
+          <label for="${name}-${id}-${index}">${label}</label>
+          <select id="${name}-${id}-${index}" name="${name}">
             ${options}
           </select>
         </div>
       `;
 };
 
-const optionsRow = (idPrefix, rowNum) => {
+const optionsRow = (id, rowNum) => {
   return `
       <div class="variant-row">
         <div class="variant-label">#${rowNum}</div>
-        ${selectOptions(idPrefix, rowNum, "size", sizeOptions, "Size")}
-        ${selectOptions(idPrefix, rowNum, "color", colorOptions, "Colour")}
+        ${selectOptions(id, rowNum, "size", sizeOptions, "Size")}
+        ${selectOptions(id, rowNum, "color", colorOptions, "Colour")}
       </div>
     `;
 };
 
 productOptions.forEach((option) => {
-  const variantInputs = [1, 2]
-    .map((num) => optionsRow(option.id, num))
-    .join("");
   const html = `
-      <div class="option" data-value="${option.id}">
+      <div class="option" data-value="${option.id}" >
+      ${
+        option.id === 2 ? `<span class="most-popular ">MOST POPULAR</span>` : ""
+      }
         <div class="option-header">
           <div class="option-header-details">
-            <input type="radio" name="unit" id="radio-${option.id}" value="${option.id}" />
+            <input type="radio" name="product" id="radio-${option.id}" value="${
+    option.id
+  }" />
             <label for="radio-${option.id}">
               <p class="product-details">
                 <span class="product-unit">${option.units}</span>
@@ -75,21 +77,17 @@ productOptions.forEach((option) => {
           </div>
           <div class="pricing">
             <p class="price">${option.price}</p>
-            <p class="original-price">${option.oldPrice}</p>
+            <p class="original-price">${option.originaPrice}</p>
           </div>
         </div>
   
       
         <div class="size-color" id="option-${option.id}">
-        ${variantInputs}
+        ${optionsRow(option.id, 1)}
+        ${optionsRow(option.id, 2)}
+
       </div>
          
-
-
-
-
- 
-
         </div>
       </div>
 
@@ -98,9 +96,9 @@ productOptions.forEach((option) => {
   options.insertAdjacentHTML("beforeend", html);
 });
 
-// Select all radio buttons once they're rendered
+// selecting all radio buttons
 document.addEventListener("change", (e) => {
-  if (e.target.name === "unit") {
+  if (e.target.name === "product") {
     const selectedValue = e.target.value;
 
     // Hide all .size-color elements first

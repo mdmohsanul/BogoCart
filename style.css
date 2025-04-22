@@ -16,30 +16,29 @@ body {
   justify-content: center;
   color: rgb(66, 50, 50);
 }
-.bogo-banner {
+.bogo-header {
     display: flex;
     align-items: center;
     text-align: center;
     margin: 2rem 0;
-   
   }
   
-.bogo-banner::before,
-.bogo-banner::after {
+.bogo-header::before,
+.bogo-header::after {
     content: "";
     flex: 1;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #C8C8C8;
 }
   
-.bogo-banner::before {
+.bogo-header::before {
     margin-right: 1rem;
   }
   
-.bogo-banner::after {
+.bogo-header::after {
     margin-left: 1rem;
 }
   
-.bogo-banner span {
+.bogo-header span {
     color: #d23131;
     font-weight: bold;
     font-size: 2rem;
@@ -51,32 +50,34 @@ body {
   background: white;
   border-radius: 1rem;
   padding: 3rem;
-  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 .discount-badge {
   display: inline-block;
   padding: .5rem 1rem;
-  background: #f36f7c;
+  background: #FF6B82;
   color: white;
   border-radius: .5rem;
   font-size: 1.2rem;
 }
 
 .option {
-  border: 1px solid #ccc;
+  border: 1px solid #C8C8C8;
   border-radius: .8rem;
   padding: 1.5rem;
   margin-bottom: 1rem;
   position: relative;
 }
-.option.most-popular {
-  border-color: #ff5e8e;
-  background-color: #fff0f4;
-}
-.most-popular .badge {
-  background-color: #ff5e8e;
+
+.most-popular  {
+  border-radius: .5rem;
+  background: #FF6B82;
+  position: absolute;
+  top: -.5rem;
+  right: 2rem;
+  padding: .5rem .8rem;
+  color: white;
 }
 .option-header {
   display: flex;
@@ -140,7 +141,7 @@ margin: 1rem 0;
 padding: 1rem 0;
 border: none;
 border-radius: .5rem;
-background-color: #FF6B82;
+background: #FF6B82;
 color:white;
 cursor: pointer;
 }
@@ -172,8 +173,9 @@ cursor: pointer;
 }
 
 .variant-label {
-  font-weight: bold;
+  font-weight: 500;
   margin-right: .5rem;
+  font-size: 1.2rem;
 }
 
 .variant-select {
